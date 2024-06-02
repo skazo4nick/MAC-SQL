@@ -8,6 +8,8 @@ In this paper, we propose a multi-agent collaborative Text-to-SQL framework MAC-
 
 
 # 🔥 Updates
+- [**2024-04-23**] We have updated the `sql-llama-instruct-v0.5.jsonl` and training scripts in `training_scripts` dir of this project. Please check it out.
+- [**2024-04-22**] We have updated the [SQL-Llama-v0.5](https://huggingface.co/IceKingBing) model and data.zip (update dev_gold_schema.json in bird and spider) The download links of the updated data are available on [Baidu Disk](https://pan.baidu.com/s/1jU2li3d-enhzswx8VdNYdg?pwd=hfmk) and [Google Drive](https://drive.google.com/file/d/1kkkNJSmJkZKeZyDFUDG7c4mnkxsrr-om/view?usp=sharing).
 - [**2024-02-18**] We have updated the paper, with updates mainly focusing on experiments and framework details, check it out! [link](https://arxiv.org/abs/2312.11242).
 - [**2023-12-26**] We have updated the paper, with updates mainly focusing on the title, abstract, introduction, some details, and appendix. In addition, we give some bad case examples on `bad_cases` folder, check it out!
 - [**2023-12-19**] We released our first version [paper](https://arxiv.org/abs/2312.11242), [code](https://github.com/wbbeyourself/MAC-SQL). Check it out!
@@ -40,7 +42,7 @@ export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 
 In order to prepare the data more quickly, I have packaged the files including the databases of the BIRD dataset and the Spider dataset into `data.zip` and uploaded them. 
 All files were downloaded on December 19, 2023, ensuring they are the latest version at that moment. 
-The download links are available on [Baidu Disk](https://pan.baidu.com/s/1LkOtJEjNCG-N-ozq4mbuag?pwd=6ak5) and [Google Drive](https://drive.google.com/file/d/1dXHsYDziA8NwZuyjDaFV3j9CPjYdNuyP/view?usp=drive_link).
+The download links are available on [Baidu Disk](https://pan.baidu.com/s/1jU2li3d-enhzswx8VdNYdg?pwd=hfmk) and [Google Drive](https://drive.google.com/file/d/1kkkNJSmJkZKeZyDFUDG7c4mnkxsrr-om/view?usp=sharing)(update on 2024-04-22).
 
 After downloading the `data.zip` file, you should delete the existing data folder in the project directory and replace it with the unzipped data folder from `data.zip`.
 
@@ -61,6 +63,8 @@ python app_bird.py
 python app_spider.py
 ```
 
+If occur error `/bin/bash^M: bad interpreter` in Linux, use `sed -i -e 's/\r$//' run.sh` to solve it.
+
 ## 📝Evaluation Dataset
 
 We evaluate our method on both BIRD dataset and Spider dataset.
@@ -70,6 +74,17 @@ EX: Execution Accuracy(%)
 VES: Valid Efficiency Score(%)
 
 Refer to our paper for the details.
+
+
+## 🫡Run SQL-Llama
+
+Download the [SQL-Llama](https://huggingface.co/IceKingBing)(current v0.5 version) and follow the [SQL-Llama-deployment.md](SQL-Llama-deployment.md) to deploy.
+
+Uncomment the `MODEL_NAME = 'CodeLlama-7b-hf'` in `core/api_config.py` to set the global model and comment other `MODEL_NAME = xxx` lines.
+
+Uncomment the `export OPENAI_API_BASE='http://0.0.0.0:8000/v1'` in `run.sh` to set the local model api base.
+
+Then, run `run.sh` to start your local inference.
 
 
 ## 🌟 Project Structure
